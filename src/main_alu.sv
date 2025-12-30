@@ -17,13 +17,15 @@ localparam BAN = 7;
 
 logic [31:0] sum;
 logic carry_out;
-logic [63:0] mul;
+logic [63:0] output_m_d;
 
 CLA add(.a(a),.b(b),.carry_cin(1'b0),.sum_cla(sum),.carry_cla(carry_out));
 
 CLA sub(.a(a),.b(~b),.carry_cin(1'b1),.sum_cla(sum),.carry_cla(carry_out));
 
-booth_algo(.a(a),.b(b),.c(mul));
+booth_algo multi(.a(a),.b(b),.c(output_m_d));
+
+non_restoring_div div(.a(a),.b(b),.out(output_m_d),.sign_check(carry_out));
 
 always_comb
 begin
@@ -37,8 +39,12 @@ begin
             carry = carry_out; 
         end
         MUL: begin
-            out = mul;
+            out = output_m_d;
             carry = 1'b0;
+        end
+        DIV: begin
+            out = output_m_d; // [63:32] is quotient, [31:0] is remainder.   
+            carry = carry_out; // carry is sign notation, if the result of the division is negative carry will be 1 if its positive it will be 0
         end
     endcase           
 end
