@@ -2,7 +2,7 @@
 
 module main_alu(input logic[31:0] a,
                 input logic[31:0] b,
-                input logic[3:0] opcode,
+                input logic[2:0] opcode,
                 input logic[5:0] shift,
                 output logic [63:0] out,
                 output logic carry);
