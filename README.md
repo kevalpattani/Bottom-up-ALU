@@ -4,8 +4,7 @@ Bottom UP ALU
 #### to do 
 - [x] carry look ahead adder (completely carry independent)
 - [x] booth algorithm
-- [ ] division module 
-- [ ] r shift and l shift
-- [ ] or and and
+- [x] division module 
+- [x] funnel shift and rotate shift
 - [ ] docs
 - [ ] proof for the CLA 
