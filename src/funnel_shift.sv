@@ -6,20 +6,22 @@ module funnel_shift(input logic[31:0] a,b,
                     output logic[63:0] out);
                     
 logic[63:0] pre_out;
-logic[63:0] inter_out;                 
+logic[63:0] inter_out; 
+logic[5:0] s;                
                                                                           
 always_comb
 begin 
-
+    
     pre_out <= {a,b};
+    s = shift % 64;
 
     if (side == 1)
     begin
-        inter_out <= (pre_out) << shift[5:0];
+        inter_out <= (pre_out) << s;
     end
     else
     begin
-        inter_out <= (pre_out) >> shift[5:0];
+        inter_out <= (pre_out) >> s;
     end
 end      
 
